@@ -1,7 +1,9 @@
 
 # CE-HKGFinder
 
-## Computational Identification of Housekeeping Gene Candidates in *C. elegans*
+## Computational Identification of Housekeeping Gene Candidates in *C. elegans*  
+
+![](https://img.shields.io/badge/download-1K-brightgreen.svg)
 
 - Bo Li, Jingxin Tao, Youjin Hao, *et al.* 
 
