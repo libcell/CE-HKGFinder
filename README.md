@@ -1,2 +1,2 @@
 # CE-HKGFinder
- Computational identification of housekeeping gene candidates in C. elegans
+ Computational identification of housekeeping gene candidates in *C. elegans*
