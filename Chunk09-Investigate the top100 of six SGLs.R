@@ -14,11 +14,13 @@
 ### code chunk number 09: Investigation of top 100 genes of SGLs.
 ### ****************************************************************************
 
-top50HKG <- get(load("J:/rank50_top5000_v2.RData"))
+setwd("J:\\00-Paper Publication\\A2-HKG identification (Tao Jing-xin)\\Manuscript")
 
-top100HKG <- get(load("J:/top5000_rank100.RData"))
+top50HKG <- get(load("Data/rank50_top5000_v2.RData"))
 
-gpl200anno <- get(load("J:/gpl200anno.RData"))
+top100HKG <- get(load("Data/rank100_top5000_v2.RData"))
+
+gpl200anno <- get(load("Data/gpl200anno.RData"))
 
 for (n in 1:length(top100HKG)) {
   
