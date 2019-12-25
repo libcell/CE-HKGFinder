@@ -62,6 +62,6 @@ save(top5000list, file = "top5000list_symbol.RData")
 
 library(openxlsx)
 
-write.xlsx(top5000list, "S4-top5000_gene_symbol.xlsx", row.names = TRUE)
+# write.xlsx(top5000list, "S4-top5000_gene_symbol.xlsx", row.names = TRUE)
 
 # End of this line. 
