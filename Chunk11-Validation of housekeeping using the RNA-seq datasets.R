@@ -1,4 +1,23 @@
 
+################################################################################
+#    &&&....&&&    % Project: Identification of HKG candidates in C. elegans   #
+#  &&&&&&..&&&&&&  % Author: Bo Li, Jingxin Tao, Youjin Hao                    #
+#  &&&&&&&&&&&&&&  % Date: Dec. 24th, 2019                                     #
+#   &&&&&&&&&&&&   %                                                           #
+#     &&&&&&&&     % Environment: R version 3.5.3;                             #
+#       &&&&       % Platform: x86_64-pc-linux-gnu (64-bit)                    #
+#        &         %                                                           #
+################################################################################
+
+###==========================================================================### 
+### ****************************************************************************
+### code chunk number 09: Validation of housekeeping genes.
+### ****************************************************************************
+
+### Step-01. Comparison of gene expression levels using RNA-sequencing datasets
+
+setwd("J:\\00-Paper Publication\\A2-HKG identification (Tao Jing-xin)\\Manuscript")
+
 #creat a mew and empty file folder
 
 setwd("/Users/touyasushishin/DEE2/")
@@ -18,7 +37,6 @@ expre_gse <- c("GSE52861",
                "GSE102680",
                "GSE124049",
                "GSE60755")
-
 
 for (i in expre_gse) {
  
@@ -111,6 +129,5 @@ for (f in fileName[1:6]) {
 
   }
 
-
-
+### End of Step-01.
 
