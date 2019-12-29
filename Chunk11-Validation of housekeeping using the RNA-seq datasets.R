@@ -11,7 +11,7 @@
 
 ###==========================================================================### 
 ### ****************************************************************************
-### code chunk number 09: Validation of housekeeping genes.
+### code chunk number 11: Validation of HKGs using RNA-sequencing datasets.
 ### ****************************************************************************
 
 ### Step-01. Comparison of gene expression levels using RNA-sequencing datasets
