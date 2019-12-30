@@ -16,51 +16,62 @@
 
 ### Step-01. Comparison of gene expression levels using RNA-sequencing datasets
 
-setwd("J:\\00-Paper Publication\\A2-HKG identification (Tao Jing-xin)\\Manuscript")
+setwd("J:/")
 
-#creat a mew and empty file folder
+dir.create("HKG_test")
 
-setwd("/Users/touyasushishin/DEE2/")
+setwd("HKG_test")
 
-library("devtools")
-
-devtools::install_github("markziemann/dee2/getDEE2")
+# devtools::install_github("markziemann/dee2/getDEE2")
 
 library('getDEE2')
 
 mdat <- getDee2Metadata("celegans")
 
-expre_gse <- c("GSE52861",
-               "GSE63528",
-               "GSE94879",
-               "GSE87528",
-               "GSE102680",
-               # "GSE124049",
-               "GSE50548", 
-               "GSE60755")
+expre_gse <- c(# "GSE52861",
+               # "GSE63528",
+               # "GSE94879",
+               # "GSE87528",
+               # "GSE102680",
+               # "GSE124049", 
+  
+               # "GSE87078", 
+  
+               "GSE111364", 
+               "GSE49043", 
+               "GSE60063", 
+               "GSE108263",
+               "GSE54030",
+               "GSE74403"
+               
+               # "GSE50548", 
+               # "GSE60755"
+               )
 
 for (i in expre_gse) {
  
- mdat1 <- mdat[which(mdat$GSE_accession  %in% i),] 
+ mdat1 <- mdat[which(mdat$GSE_accession %in% i),] 
 
- SRRlist <-as.vector(mdat1$SRR_accession)
+ SRRlist <- as.vector(mdat1$SRR_accession)
 
- x <- getDEE2("celegans",SRRlist)
+ dat <- getDEE2("celegans", SRRlist)
  
- y <- x$GeneCounts
+ gene.count <- dat$GeneCounts
  
- y1 <- x$GeneInfo
+ gene.info <- dat$GeneInfo
   
- expr <- cbind(y1,y)
+ expr <- cbind(gene.info, gene.info)
   
- write.csv(expr, paste0(i,"_dat.csv")) 
+ write.csv(expr, paste0(i, "_count.csv")) 
  
  }
 
 
-library("edgeR")
+library(edgeR)
 
-fileName <- dir()
+library(openxlsx)
+
+fileName <- dir()[grep("_dat.csv", dir())]
 
 aaa <- function(x) {mean(x, na.rm = TRUE)}
 
@@ -70,7 +81,7 @@ genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2",
               "rps-26", "rps-4", "rps-2", "rps-16", "rps-17", 
               "rpl-24.1", "rpl-15", "rpl-35", "rpl-36", "rpl-33","rpl-27")
 
-for (f in fileName[1:6]) { 
+for (f in fileName) { 
   
   data <- read.csv(f) 
   
@@ -82,8 +93,7 @@ for (f in fileName[1:6]) {
   
   cpm_data <- data_norm 
   
-  
-  a1 <- NULL 
+  mat.26 <- NULL 
   
   for (g in genes_26) { 
     
@@ -93,19 +103,21 @@ for (f in fileName[1:6]) {
     
     if (!is.null(nrow(tmp))) tmp1 <- apply(tmp, 2, aaa) else tmp1 <- tmp
     
-    a1 <- rbind(a1, tmp1)  
+    mat.26 <- rbind(mat.26, tmp1)  
     
     } 
   
-  rownames(a1) <- genes_26 
+  rownames(mat.26) <- genes_26 
   
-  a1 <- log(a1 + 1, 2) 
+  mat.26 <- log(mat.26 + 1, 2) 
   
   #Gini rank  
   
-  tmp <- apply(a1, 1, ineq::Gini) 
+  tmp <- apply(mat.26, 1, ineq::Gini) 
   
   GC <- sort(tmp) 
+  
+  GC <- as.matrix(GC)
   
   print("############################ Start ##################################")
   
@@ -117,12 +129,17 @@ for (f in fileName[1:6]) {
   
   #SD rank 
   
-  tmp1 <- apply(a1, 1, sd) 
+  tmp1 <- apply(mat.26, 1, sd) 
   
   SD <- sort(tmp1) 
   
+  SD <- as.matrix(SD)
+  
   #print(as.data.frame(SD[1:10])) 
-  write.csv(SD[1:10], paste(f, "csv", sep = "."))
+  
+  res <- list(SD = SD, GC = GC)
+  
+  write.xlsx(res, file = paste(f, "xlsx", sep = "."), col.names = TRUE, row.names = TRUE)
   
   Sys.sleep(3)
   
