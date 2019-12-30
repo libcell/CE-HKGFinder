@@ -36,8 +36,8 @@ expre_gse <- c(# "GSE52861",
                # "GSE124049", 
                # "GSE87078", 
   
-               "GSE111364", 
-               "GSE49043", 
+               # "GSE111364", 
+               # "GSE49043", 
                "GSE60063", 
                "GSE108263",
                "GSE54030",
@@ -70,7 +70,7 @@ library(edgeR)
 
 library(openxlsx)
 
-fileName <- dir()[grep("_dat.csv", dir())]
+fileName <- dir()[grep("_count.csv", dir())]
 
 aaa <- function(x) {mean(x, na.rm = TRUE)}
 
