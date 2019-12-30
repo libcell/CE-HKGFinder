@@ -35,7 +35,8 @@ expre_gse <- c("GSE52861",
                "GSE94879",
                "GSE87528",
                "GSE102680",
-               "GSE124049",
+               # "GSE124049",
+               "GSE50548", 
                "GSE60755")
 
 for (i in expre_gse) {
