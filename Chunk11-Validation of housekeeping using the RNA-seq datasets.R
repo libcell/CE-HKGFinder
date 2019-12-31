@@ -9,6 +9,12 @@
 #        &         %                                                           #
 ################################################################################
 
+genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2", 
+              "eif-3.C", "act-1", "cdc-42", "pmp-3", "act-2", 
+              "csq-1", "ama-1", "rbd-1", "rps-23", "rps-27", 
+              "rps-26", "rps-4", "rps-2", "rps-16", "rps-17", 
+              "rpl-24.1", "rpl-15", "rpl-35", "rpl-36", "rpl-33","rpl-27")
+
 ###==========================================================================### 
 ### ****************************************************************************
 ### code chunk number 11: Validation of HKGs using RNA-sequencing datasets.
@@ -28,24 +34,9 @@ library('getDEE2')
 
 mdat <- getDee2Metadata("celegans")
 
-expre_gse <- c(# "GSE52861",
-               # "GSE63528",
-               # "GSE94879",
-               # "GSE87528",
-               # "GSE102680",
-               # "GSE124049", 
-               # "GSE87078", 
-  
-               # "GSE111364", 
-               # "GSE49043", 
-               # "GSE60063", 
-               # "GSE108263",
-               "GSE49043",
-               "GSE98915"
-               
-               # "GSE50548", 
-               # "GSE60755"
-               )
+expre_gse <- c("GSE63528", 
+               "GSE60755", 
+               "GSE98919")
 
 for (i in expre_gse) {
  
@@ -59,7 +50,7 @@ for (i in expre_gse) {
  
  gene.info <- dat$GeneInfo
   
- expr <- cbind(gene.info, gene.info)
+ expr <- cbind(gene.info, gene.count)
   
  write.csv(expr, paste0(i, "_count.csv")) 
  
@@ -74,11 +65,6 @@ fileName <- dir()[grep("_count.csv", dir())]
 
 aaa <- function(x) {mean(x, na.rm = TRUE)}
 
-genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2", 
-              "eif-3.C", "act-1", "cdc-42", "pmp-3", "act-2", 
-              "csq-1", "ama-1", "rbd-1", "rps-23", "rps-27", 
-              "rps-26", "rps-4", "rps-2", "rps-16", "rps-17", 
-              "rpl-24.1", "rpl-15", "rpl-35", "rpl-36", "rpl-33","rpl-27")
 
 for (f in fileName) { 
   
