@@ -126,7 +126,8 @@ for (f in fileName) {
   
   res <- list(SD = SD, GC = GC)
   
-  write.xlsx(res, file = paste(f, "xlsx", sep = "."), col.names = TRUE, row.names = TRUE)
+  write.xlsx(res, file = paste(f, "xlsx", sep = "."), 
+             col.names = TRUE, row.names = TRUE)
   
   Sys.sleep(1)
   
