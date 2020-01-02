@@ -61,6 +61,7 @@ for (i in expre_gse) {
  }
 
 
+
 library(edgeR)
 
 library(openxlsx)
@@ -69,6 +70,7 @@ fileName <- dir()[grep("_count.csv", dir())]
 
 ask.mean <- function(x) {mean(x, na.rm = TRUE)}
 
+op <- par(mfrow = c(3, 2))
 
 for (f in fileName) { 
   
@@ -128,7 +130,9 @@ for (f in fileName) {
   
   res <- list(SD = SD, GC = GC)
   
-  write.xlsx(res, file = paste(f, "xlsx", sep = "."), col.names = TRUE, row.names = TRUE)
+  xlsx.file <- paste(strsplit(f, "_")[[1]][1], "xlsx", sep = ".")
+  
+  write.xlsx(res, file = xlsx.file, col.names = TRUE, row.names = TRUE)
   
   Sys.sleep(20)
   
@@ -146,6 +150,8 @@ for (f in fileName) {
   print("############################# End ####################################")
 
   }
+
+par(op)
 
 ### End of the chunk 11. 
 ###==========================================================================### 

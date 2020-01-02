@@ -263,3 +263,11 @@ sort(apply(eset.mat, 1, ineq::Gini))
 
 ### End of the chunk 12. ====================================================###
 ### ======================================================================== ###
+
+
+install.packages("vioplot")
+
+library(vioplot)
+
+vioplot(iris[, -5], 
+        col = rep(c("#FF4500", "#00A600FF"), times = c(13, 13)))
