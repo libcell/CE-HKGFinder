@@ -24,10 +24,17 @@ genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2",
 
 col_26 <- rep(c("#FF4500", "#00A600FF"), times = c(13, 13))
 
-op <- par(mfcol = c(3, 2)) # width:length = 12:8 
+# op <- par(mfcol = c(3, 2)) # width:length = 12:8 
+
+# windowsFonts(A = windowsFont("Times New Roman"))
+
+pdf(file = "myplot.pdf", family = "Times", width = 18, height = 10)
+
+op <- par(mfrow = c(2, 3), srt = 0, bty = "l", cex.lab = 1.5, cex.axis = 1.5, 
+          cex.main = 2, oma = c(0.5, 0.5, 0.5, 0.5), las = 3) # width:length = 12:8 
 
 setwd("J:/HKG_test/")
-
+library(vioplot)
 
 ###----------------------- (1) Microarray: GSE11894 -------------------------###
 ###--For DNA microarray dataset, GSE118294.----------------------------------### 
@@ -98,8 +105,12 @@ x <- t(eset.mat[sd.seq != 0, ])
 
 y <- reshape2::melt(x)
 
-vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, 
-        main = "GSE118294", xlab = NULL, ylab = "expression level") 
+vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], colMed = "yellow", 
+        main = "GSE118294", xlab = NULL, ylab = "expression level", angle = 70)
+legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
+       cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
+
+# names(pdfFonts())
 
 # SD. 
 
@@ -205,8 +216,12 @@ sd.seq <- apply(eset.mat, 1, sd)
 x <- t(eset.mat[sd.seq != 0, ]); 
 y <- reshape2::melt(x)
 
-vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, 
+vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, colMed = "yellow", 
         main = "GSE108968", xlab = NULL, ylab = "expression level") 
+legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
+       cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
+
+
 
 # SD. 
 
@@ -310,8 +325,12 @@ sd.seq <- apply(eset.mat, 1, sd)
 x <- t(eset.mat[sd.seq != 0, ]); 
 y <- reshape2::melt(x)
 
-vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, 
+vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, colMed = "yellow",  
         main = "GSE76380", xlab = NULL, ylab = "expression level") 
+legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
+       cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
+
+
 
 # SD. 
 
@@ -334,30 +353,30 @@ sort(apply(eset.mat, 1, ineq::Gini))
 
 library('getDEE2')
 
-mdat <- getDee2Metadata("celegans")
+#. mdat <- getDee2Metadata("celegans")
 
 expre_gse <- c("GSE63528", 
                "GSE60755", 
                "GSE98919")
 
-for (i in expre_gse) {
- 
- mdat1 <- mdat[which(mdat$GSE_accession %in% i),] 
-
- SRRlist <- as.vector(mdat1$SRR_accession)
-
- dat <- getDEE2("celegans", SRRlist)
- 
- gene.count <- dat$GeneCounts
- 
- gene.info <- dat$GeneInfo
-  
- expr <- cbind(gene.info, gene.count)
-  
- write.csv(expr, paste0(i, "_count.csv")) 
- 
- }
-
+#. for (i in expre_gse) {
+#.  
+#.  mdat1 <- mdat[which(mdat$GSE_accession %in% i),] 
+#. 
+#.  SRRlist <- as.vector(mdat1$SRR_accession)
+#. 
+#.  dat <- getDEE2("celegans", SRRlist)
+#.  
+#.  gene.count <- dat$GeneCounts
+#.  
+#.  gene.info <- dat$GeneInfo
+#.   
+#.  expr <- cbind(gene.info, gene.count)
+#.   
+#.  write.csv(expr, paste0(i, "_count.csv")) 
+#.  
+#.  }
+#. 
 
 
 library(edgeR)
@@ -443,14 +462,21 @@ for (f in fileName) {
   x <- t(mat.26[tmp1 != 0, ]); 
   y <- reshape2::melt(x)
 
-  vioplot(value ~ Var2, data = y, col = col_26[tmp1 != 0], las = 3, 
+  vioplot(value ~ Var2, data = y, col = col_26[tmp1 != 0], las = 3, colMed = "yellow", 
           main = gse.nam, xlab = NULL, ylab = "expression level") 
+  
+  legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
+         cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
+  
   
   print("############################# End ####################################")
 
   }
 
 par(op)
+
+dev.off()
+
 
 ### End of the chunk 11. 
 ###==========================================================================### 
