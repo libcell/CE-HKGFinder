@@ -38,7 +38,7 @@ op <- par(mfrow = c(2, 3), srt = 0, bty = "l", cex.lab = 1.5, cex.axis = 1.5,
 setwd("J:/HKG_test/")
 library(vioplot)
 
-###----------------------- (1) Microarray: GSE11894 -------------------------###
+###----------------------- (1) Microarray: GSE118294 ------------------------###
 ###--For DNA microarray dataset, GSE118294.----------------------------------### 
 
 library(affy)
@@ -222,8 +222,6 @@ vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, colMed = "ye
         main = "GSE108968", xlab = NULL, ylab = "expression level") 
 legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
        cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
-
-
 
 # SD. 
 
