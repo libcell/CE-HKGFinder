@@ -70,7 +70,7 @@ fileName <- dir()[grep("_count.csv", dir())]
 
 ask.mean <- function(x) {mean(x, na.rm = TRUE)}
 
-op <- par(mfrow = c(3, 2))
+op <- par(mfrow = c(3, 2)) # width:length = 12:8 
 
 for (f in fileName) { 
   
@@ -145,7 +145,7 @@ for (f in fileName) {
   x <- t(mat.26[tmp1 != 0, ]); 
   y <- reshape2::melt(x)
 
-  vioplot(value ~ Var2, data = y, col = col_26[tmp1 != 0], las = 3)
+  vioplot(value ~ Var2, data = y, col = col_26[tmp1 != 0], las = 3) 
   
   print("############################# End ####################################")
 
