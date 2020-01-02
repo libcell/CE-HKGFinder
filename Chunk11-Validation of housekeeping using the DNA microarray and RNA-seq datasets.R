@@ -22,13 +22,15 @@ genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2",
               "rps-26", "rps-4", "rps-2", "rps-16", "rps-17", 
               "rpl-24.1", "rpl-15", "rpl-35", "rpl-36", "rpl-33","rpl-27")
 
-col_26 <- rep(c("#FF4500", "#00A600FF"), times = c(13, 13))
+# col_26 <- rep(c("#FF4500", "#00A600FF"), times = c(13, 13))
+
+col_26 <- rep(c("#EE9572", "#698B69"), times = c(13, 13))
 
 # op <- par(mfcol = c(3, 2)) # width:length = 12:8 
 
 # windowsFonts(A = windowsFont("Times New Roman"))
 
-pdf(file = "myplot.pdf", family = "Times", width = 18, height = 10)
+pdf(file = "myplot1.pdf", family = "Times", width = 18, height = 10)
 
 op <- par(mfrow = c(2, 3), srt = 0, bty = "l", cex.lab = 1.5, cex.axis = 1.5, 
           cex.main = 2, oma = c(0.5, 0.5, 0.5, 0.5), las = 3) # width:length = 12:8 
