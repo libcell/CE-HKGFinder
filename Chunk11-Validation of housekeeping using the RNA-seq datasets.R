@@ -22,6 +22,8 @@ genes_26 <- c("cyc-1", "tba-1", "atp-3", "mdh-1", "gpd-2",
               "rps-26", "rps-4", "rps-2", "rps-16", "rps-17", 
               "rpl-24.1", "rpl-15", "rpl-35", "rpl-36", "rpl-33","rpl-27")
 
+col_26 <- rep(c("#FF4500", "#00A600FF"), times = c(13, 13))
+
 ### Step-01. Comparison of gene expression levels using RNA-sequencing datasets
 
 setwd("J:/")
@@ -65,7 +67,7 @@ library(openxlsx)
 
 fileName <- dir()[grep("_count.csv", dir())]
 
-aaa <- function(x) {mean(x, na.rm = TRUE)}
+ask.mean <- function(x) {mean(x, na.rm = TRUE)}
 
 
 for (f in fileName) { 
@@ -88,7 +90,7 @@ for (f in fileName) {
     
     tmp <- cpm_data[pos, ]
     
-    if (!is.null(nrow(tmp))) tmp1 <- apply(tmp, 2, aaa) else tmp1 <- tmp
+    if (!is.null(nrow(tmp))) tmp1 <- apply(tmp, 2, ask.mean) else tmp1 <- tmp
     
     mat.26 <- rbind(mat.26, tmp1)  
     
@@ -126,10 +128,20 @@ for (f in fileName) {
   
   res <- list(SD = SD, GC = GC)
   
-  write.xlsx(res, file = paste(f, "xlsx", sep = "."), 
-             col.names = TRUE, row.names = TRUE)
+  write.xlsx(res, file = paste(f, "xlsx", sep = "."), col.names = TRUE, row.names = TRUE)
   
-  Sys.sleep(1)
+  Sys.sleep(20)
+  
+  # Boxplot 
+  # print(mat.26[tmp1 != 0, ])
+  print(tmp1)
+  
+  # boxplot(t(mat.26[tmp1 != 0, ]), col = col_26[tmp1 != 0], las = 3)
+  
+  x <- t(mat.26[tmp1 != 0, ]); 
+  y <- reshape2::melt(x)
+
+  vioplot(value ~ Var2, data = y, col = col_26[tmp1 != 0], las = 3)
   
   print("############################# End ####################################")
 
