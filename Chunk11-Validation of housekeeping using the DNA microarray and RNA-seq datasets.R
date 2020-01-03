@@ -43,15 +43,14 @@ library(vioplot)
 
 library(affy)
 
-setwd("GSE118294_RAW/")
+#. setwd("GSE118294_RAW/")
+#. dat <- ReadAffy()
+#. eset <- rma(dat)
+#. es <- exprs(eset)
 
-dat <- ReadAffy()
+#. setwd("..")
 
-eset <- rma(dat)
-
-es <- exprs(eset)
-
-setwd("..")
+es <- get(load("GSE118294.RData"))
 
 library(GEOquery)
 
@@ -330,8 +329,6 @@ vioplot(value ~ Var2, data = y, col = col_26[sd.seq != 0], las = 3, colMed = "ye
 legend("topleft", fill = unique(col_26), legend = c("pRGs", "iRGs"), 
        cex = 1.5, bg = "grey90", text.font = 2) # bty = "n"
 
-
-
 # SD. 
 
 sort(sd.seq)
@@ -476,7 +473,6 @@ for (f in fileName) {
 par(op)
 
 dev.off()
-
 
 ### End of the chunk 11. 
 ###==========================================================================### 
