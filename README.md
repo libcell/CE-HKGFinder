@@ -3,7 +3,7 @@
 
 ## Computational Identification of Housekeeping Gene Candidates in *C. elegans*  
 
-- Bo Li, Jingxin Tao, Youjin Hao, *et al.*
+- Bo Li, Jingxin Tao, Youjin Hao, Xudong Li, *et al.*
 
 <img src = "Image/hkfinder.png" width = "800" align = "middle">
 
